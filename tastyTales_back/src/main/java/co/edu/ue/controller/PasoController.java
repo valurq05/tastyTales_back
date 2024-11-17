@@ -10,19 +10,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.edu.ue.entity.Categoria;
-import co.edu.ue.service.ICategoriaService;
+import co.edu.ue.entity.Paso;
+import co.edu.ue.service.IPasoService;
 
-@RestController
 @CrossOrigin("*")
+@RestController
 @RequestMapping(value="api")
-public class CategoriaController {
+public class PasoController {
 
 	@Autowired
-	ICategoriaService service;
+	IPasoService service;
 	
-	@GetMapping("categorias")
-	public ResponseEntity<List<Categoria>> getCategorias(){
-		return new ResponseEntity<List<Categoria>>(service.listAllCategoria(), HttpStatus.ACCEPTED);
+	@GetMapping(value="pasos")
+	public ResponseEntity<List<Paso>> getPasos(){
+		return new ResponseEntity<List<Paso>>(service.listAllPasos(), HttpStatus.ACCEPTED);
 	}
 }

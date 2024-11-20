@@ -57,14 +57,14 @@ public class Adicional implements Serializable {
 
 	public PasoAdicional addpasoAdicional(PasoAdicional pasoAdicional) {
 		getpasoAdicional().add(pasoAdicional);
-		pasoAdicional.setAdicionale(this);
+		pasoAdicional.setAdicional(this);
 
 		return pasoAdicional;
 	}
 
 	public PasoAdicional removepasoAdicional(PasoAdicional pasoAdicional) {
 		getpasoAdicional().remove(pasoAdicional);
-		pasoAdicional.setAdicionale(null);
+		pasoAdicional.setAdicional(null);
 
 		return pasoAdicional;
 	}

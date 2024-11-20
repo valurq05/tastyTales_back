@@ -4,6 +4,9 @@ import java.io.Serializable;
 import jakarta.persistence.*;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  * The persistent class for the usuarios database table.
@@ -17,21 +20,27 @@ public class Usuario implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="userID")
 	private int userID;
-
+	
+	@Column(name="userDoc")
 	private String userDoc;
 
+	@Column(name="userNombre")
 	private String userNombre;
 
+	@Column(name="userPassword")
 	private String userPassword;
 
 	//bi-directional many-to-one association to CalificacionReceta
-	@OneToMany(mappedBy="usuario")
-	private List<CalificacionReceta> calificacionrecetas;
+//	@OneToMany(mappedBy="usuario")
+//	@JsonBackReference
+//	private List<CalificacionReceta> calificacionrecetas;
 
 	//bi-directional many-to-one association to RecetaFavorita
-	@OneToMany(mappedBy="usuario")
-	private List<RecetaFavorita> recetasfavoritas;
+//	@OneToMany(mappedBy="usuario")
+//	@JsonBackReference
+//	private List<RecetaFavorita> recetasfavoritas;
 
 	public Usuario() {
 	}
@@ -68,48 +77,48 @@ public class Usuario implements Serializable {
 		this.userPassword = userPassword;
 	}
 
-	public List<CalificacionReceta> getCalificacionrecetas() {
-		return this.calificacionrecetas;
-	}
-
-	public void setCalificacionrecetas(List<CalificacionReceta> calificacionrecetas) {
-		this.calificacionrecetas = calificacionrecetas;
-	}
-
-	public CalificacionReceta addCalificacionreceta(CalificacionReceta calificacionreceta) {
-		getCalificacionrecetas().add(calificacionreceta);
-		calificacionreceta.setUsuario(this);
-
-		return calificacionreceta;
-	}
-
-	public CalificacionReceta removeCalificacionreceta(CalificacionReceta calificacionreceta) {
-		getCalificacionrecetas().remove(calificacionreceta);
-		calificacionreceta.setUsuario(null);
-
-		return calificacionreceta;
-	}
-
-	public List<RecetaFavorita> getRecetasfavoritas() {
-		return this.recetasfavoritas;
-	}
-
-	public void setRecetasfavoritas(List<RecetaFavorita> recetasfavoritas) {
-		this.recetasfavoritas = recetasfavoritas;
-	}
-
-	public RecetaFavorita addRecetasfavorita(RecetaFavorita recetasfavorita) {
-		getRecetasfavoritas().add(recetasfavorita);
-		recetasfavorita.setUsuario(this);
-
-		return recetasfavorita;
-	}
-
-	public RecetaFavorita removeRecetasfavorita(RecetaFavorita recetasfavorita) {
-		getRecetasfavoritas().remove(recetasfavorita);
-		recetasfavorita.setUsuario(null);
-
-		return recetasfavorita;
-	}
+//	public List<CalificacionReceta> getCalificacionrecetas() {
+//		return this.calificacionrecetas;
+//	}
+//
+//	public void setCalificacionrecetas(List<CalificacionReceta> calificacionrecetas) {
+//		this.calificacionrecetas = calificacionrecetas;
+//	}
+//
+//	public CalificacionReceta addCalificacionreceta(CalificacionReceta calificacionreceta) {
+//		getCalificacionrecetas().add(calificacionreceta);
+//		calificacionreceta.setUsuario(this);
+//
+//		return calificacionreceta;
+//	}
+//
+//	public CalificacionReceta removeCalificacionreceta(CalificacionReceta calificacionreceta) {
+//		getCalificacionrecetas().remove(calificacionreceta);
+//		calificacionreceta.setUsuario(null);
+//
+//		return calificacionreceta;
+//	}
+//
+//	public List<RecetaFavorita> getRecetasfavoritas() {
+//		return this.recetasfavoritas;
+//	}
+//
+//	public void setRecetasfavoritas(List<RecetaFavorita> recetasfavoritas) {
+//		this.recetasfavoritas = recetasfavoritas;
+//	}
+//
+//	public RecetaFavorita addRecetasfavorita(RecetaFavorita recetasfavorita) {
+//		getRecetasfavoritas().add(recetasfavorita);
+//		recetasfavorita.setUsuario(this);
+//
+//		return recetasfavorita;
+//	}
+//
+//	public RecetaFavorita removeRecetasfavorita(RecetaFavorita recetasfavorita) {
+//		getRecetasfavoritas().remove(recetasfavorita);
+//		recetasfavorita.setUsuario(null);
+//
+//		return recetasfavorita;
+//	}
 
 }

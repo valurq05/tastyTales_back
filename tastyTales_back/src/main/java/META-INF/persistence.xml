@@ -1,14 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="3.0" xmlns="https://jakarta.ee/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
 	<persistence-unit name="4-ProjectUsuarios">
-		<class>co.edu.ue.entity.Adicional</class>
-		<class>co.edu.ue.entity.CalificacionReceta</class>
-		<class>co.edu.ue.entity.Categoria</class>
-		<class>co.edu.ue.entity.Paso</class>
-		<class>co.edu.ue.entity.PasoAdicional</class>
-		<class>co.edu.ue.entity.Receta</class>
-		<class>co.edu.ue.entity.RecetaCategoria</class>
-		<class>co.edu.ue.entity.RecetaFavorita</class>
-		<class>co.edu.ue.entity.Usuario</class>
 	</persistence-unit>
 </persistence>

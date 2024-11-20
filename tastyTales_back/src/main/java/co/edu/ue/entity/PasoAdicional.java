@@ -51,7 +51,7 @@ public class PasoAdicional implements Serializable {
 		return this.adicional;
 	}
 
-	public void setadicional(Adicional adicional) {
+	public void setAdicional(Adicional adicional) {
 		this.adicional = adicional;
 	}
 

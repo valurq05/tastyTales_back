@@ -15,9 +15,9 @@ public class UsuarioRepositoryDao implements IUsuarioRepositoryDao{
 	IUsuarioJpa jpa;
 
 	@Override
-	public List<Usuario> createUsuario(Usuario usuario) {
+	public Usuario createUsuario(Usuario usuario) {
 		jpa.save(usuario);
-		return listAllUsuarios();
+		return usuario;
 	}
 
 	@Override
@@ -37,4 +37,5 @@ public class UsuarioRepositoryDao implements IUsuarioRepositoryDao{
 	public List<Usuario> listAllUsuarios() {
 		return jpa.findAll();
 	}
+
 }

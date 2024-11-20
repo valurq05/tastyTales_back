@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import co.edu.ue.entity.Usuario;
 import co.edu.ue.repository.dao.IUsuarioRepositoryDao;
+import co.edu.ue.repository.dto.UsuarioDto;
 
 @Service
 public class UsuarioService implements IUsuarioService{
@@ -15,9 +16,8 @@ public class UsuarioService implements IUsuarioService{
 	IUsuarioRepositoryDao dao;
 	
 	@Override
-	public List<Usuario> addUsuario(Usuario usuario) {
-		dao.createUsuario(usuario);
-		return listAllUsuarios();
+	public Usuario addUsuario(Usuario usuario) {
+		return dao.createUsuario(usuario);
 	}
 
 	@Override

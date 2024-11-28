@@ -123,11 +123,11 @@ INSERT INTO RecetasCategorias (recetaID, categoriaID) VALUES
 
 -- Tabla Usuarios
 INSERT INTO Usuarios (userNombre, userPassword, userDoc) VALUES 
-    ('Juan.perez@gmail.com', 'password123', '12345678A'), 
-    ('Ana.gomez@gmail.com', 'password456', '87654321B'), 
-    ('Luis.lopez@gmail.com', 'password789', '12312312C'), 
-    ('Maria.garcia@gmail.com', 'password101', '45645645D'), 
-    ('Carlos.ruiz@@gmail.com', 'password102', '78978978E');
+    ('Juan.perez@gmail.com', '$2b$10$7.ocSy32nJJx6Easa1YgiOfuu91gjtRl2HG/Zg9F8MtSu8auG1UkS', '12345678A'), 
+    ('Ana.gomez@gmail.com', '$2b$10$7.ocSy32nJJx6Easa1YgiOfuu91gjtRl2HG/Zg9F8MtSu8auG1UkS', '87654321B'), 
+    ('Luis.lopez@gmail.com', '$2b$10$7.ocSy32nJJx6Easa1YgiOfuu91gjtRl2HG/Zg9F8MtSu8auG1UkS', '12312312C'), 
+    ('Maria.garcia@gmail.com', '$2b$10$7.ocSy32nJJx6Easa1YgiOfuu91gjtRl2HG/Zg9F8MtSu8auG1UkS', '45645645D'), 
+    ('Carlos.ruiz@@gmail.com', '$2b$10$7.ocSy32nJJx6Easa1YgiOfuu91gjtRl2HG/Zg9F8MtSu8auG1UkS', '78978978E');
 
 
 INSERT INTO RecetasUsuarios (userID, recetaID) VALUES 

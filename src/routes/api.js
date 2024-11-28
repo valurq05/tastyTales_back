@@ -1,6 +1,8 @@
 import { Router } from "express";
 import authRoutes from './authRoutes.js';
 import usuariosRoutes from './usuariosRoutes.js';
+import adicionalesRoutes from './adicionalesRoutes.js';
+import calfRecRoutes from './calfRecRoutes.js';
 
 const router = Router();
 
@@ -14,5 +16,8 @@ router.get('/', (req, res) => {
 
 router.use(authRoutes);
 router.use(usuariosRoutes);
+router.use(adicionalesRoutes);
+router.use(adicionalesRoutes);
+router.use(calfRecRoutes);
 
 export default router;

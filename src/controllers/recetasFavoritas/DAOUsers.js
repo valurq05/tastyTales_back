@@ -11,7 +11,7 @@ export class DAOUsers {
     static selectByID = async (id) => {
         const [[data]] = await pool.query('SELECT u.userID, u.userNombre' + ' ' +
             'FROM usuarios AS u' + ' ' +
-            'WHERE u.userID = ' + id);
+            'WHERE u.userID = ?', id);
         return data;
     }
 }

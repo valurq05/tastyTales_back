@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-11-2024 a las 01:35:58
+-- Tiempo de generación: 28-11-2024 a las 16:32:58
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -49,6 +49,7 @@ INSERT INTO `roles` (`rol`, `use_user`) VALUES
 CREATE TABLE `users` (
   `use_user` varchar(50) NOT NULL,
   `use_pass` varchar(255) NOT NULL,
+  `use_doc` varchar(12) NOT NULL,
   `use_status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
@@ -56,9 +57,9 @@ CREATE TABLE `users` (
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`use_user`, `use_pass`, `use_status`) VALUES
-('admin', '{noop}$2a$10$zQbtOnC1EDe6yxJ38b.3Cu8tpoDhXAjItyBWR6sNXRUcHrPsUVcVO', 1),
-('prueba', '{noop}$2a$10$zQbtOnC1EDe6yxJ38b.3Cu8tpoDhXAjItyBWR6sNXRUcHrPsUVcVO', 1);
+INSERT INTO `users` (`use_user`, `use_pass`, `use_doc`, `use_status`) VALUES
+('admin', '{noop}$2a$10$zQbtOnC1EDe6yxJ38b.3Cu8tpoDhXAjItyBWR6sNXRUcHrPsUVcVO', '1021354564', 1),
+('prueba', '{noop}$2a$10$zQbtOnC1EDe6yxJ38b.3Cu8tpoDhXAjItyBWR6sNXRUcHrPsUVcVO', '32154867231', 1);
 
 --
 -- Índices para tablas volcadas

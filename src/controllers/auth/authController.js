@@ -34,7 +34,12 @@ export class authController {
                 sameSite: 'strict',
                 maxAge: 1000 * 60 * 60
             })
-            .send({userDB, token});
+            .send({
+                data: {
+                    user: userDB.userNombre,
+                    token: token
+                }
+            });
 
         } catch (e) {
             return res.status(401).json({ message: e.message });

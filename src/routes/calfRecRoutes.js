@@ -3,8 +3,9 @@ import { calfRecController } from '../controllers/calificacionRecetas/calfRecCon
 
 const router = Router();
 
-const { getCalfRec, selectByID } = calfRecController;
+const { getCalfRec, selectByID, postCalfRec } = calfRecController;
 router.get('/calificacion-recetas', getCalfRec);
 router.get('/calificacion/:id', selectByID);
+router.post('/calificacion', postCalfRec);
 
 export default router;

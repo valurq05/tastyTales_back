@@ -3,8 +3,9 @@ import { adicionalController } from '../controllers/adicionales/adicionalControl
 
 const router = Router();
 
-const { getAdicionales, selectByID } = adicionalController;
+const { getAdicionales, selectByID, postAdicional } = adicionalController;
 router.get('/adicionales', getAdicionales);
 router.get('/adicional/:id', selectByID);
+router.post('/adicional', postAdicional);
 
 export default router;

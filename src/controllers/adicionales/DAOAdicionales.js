@@ -8,7 +8,7 @@ export class DAOAdicionales {
 
     static selectByID = async (id) => {
         const [[data]] = await pool.query('SELECT a.adicionalID, a.adDescripcion FROM adicionales a' + ' ' + 
-            'WHERE a.adicionalID = ?', id);
+            'WHERE adicionalID = ?', id);
         return data;
     }
 }

@@ -17,7 +17,7 @@ export class DAOCalfRec {
             'INNER JOIN recetasusuarios ru ON ru.recUserID = cr.recUserID' + ' ' +
             'INNER JOIN usuarios u ON u.userID = ru.userID' + ' ' +
             'INNER JOIN recetas r ON r.recetaID = ru.recetaID' + ' ' +
-            'WHERE u.userID = ?', id);
+            'WHERE userID = ?', id);
         return data;
     }
 }

@@ -16,7 +16,7 @@ export class calfRecController {
     static selectByID = async (req, res) => {
         try {
             const { user } = req.session;
-            const { id } = req.body;
+            const { id } = req.params;
             if (!user) return res.status(401).json({ user: null });
             const data = await DAOCalfRec.selectByID(id);
             return res.status(200).json(data);

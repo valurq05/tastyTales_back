@@ -1,16 +1,25 @@
+@ -0,0 +1,142 @@
 -- CREACIÓN BASE DE DATOS
 CREATE DATABASE tasty_tales;
 
 USE tasty_tales;
 
 -- Creación tablas
+
+CREATE TABLE Usuarios (
+    userID INT PRIMARY KEY AUTO_INCREMENT,
+    userNombre VARCHAR(255),
+    userPassword VARCHAR(255),
+    userDoc VARCHAR(255)
+);
 CREATE TABLE Recetas (
     recetaID INT PRIMARY KEY AUTO_INCREMENT,
     recetaTitulo VARCHAR(255),
     recetaDescripcion VARCHAR(255),
-    recetaStatus INT   
+    recetaStatus INT,
+    userID INT,
+    FOREIGN KEY (userID) REFERENCES Usuarios(userID)
 );
-
 CREATE TABLE Adicionales (
     adicionalID INT PRIMARY KEY AUTO_INCREMENT,
     adDescripcion VARCHAR(255)
@@ -46,33 +55,23 @@ CREATE TABLE RecetasCategorias (
     FOREIGN KEY (categoriaID) REFERENCES Categorias(categoriaID)
 );
 
-CREATE TABLE Usuarios (
-    userID INT PRIMARY KEY AUTO_INCREMENT,
-    userNombre VARCHAR(255),
-    userPassword VARCHAR(255),
-    userDoc VARCHAR(12)
-);
 
-CREATE TABLE RecetasUsuarios (
-    recUserID INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE RecetasFavoritas (
+    recFavID INT PRIMARY KEY AUTO_INCREMENT,
+    recFavStatus INT,
     userID INT,
     recetaID INT,
     FOREIGN KEY (userID) REFERENCES Usuarios(userID),
     FOREIGN KEY (recetaID) REFERENCES Recetas(recetaID)
 );
 
-CREATE TABLE RecetasFavoritas (
-    recFavID INT PRIMARY KEY AUTO_INCREMENT,
-    recFavStatus INT,
-    recUserID INT,
-    FOREIGN KEY (recUserID) REFERENCES RecetasUsuarios(recUserID)
-);
-
 CREATE TABLE CalificacionRecetas (
     califRecID INT PRIMARY KEY AUTO_INCREMENT,
     calificacion INT,
-    recUserID INT,
-    FOREIGN KEY (recUserID) REFERENCES RecetasUsuarios(recUserID)
+    recetaID INT,
+    userID INT,
+    FOREIGN KEY (recetaID) REFERENCES Recetas(recetaID),
+    FOREIGN KEY (userID) REFERENCES Usuarios(userID)
 );
 -- INSERTAR DATOS
 
@@ -123,36 +122,24 @@ INSERT INTO RecetasCategorias (recetaID, categoriaID) VALUES
 
 -- Tabla Usuarios
 INSERT INTO Usuarios (userNombre, userPassword, userDoc) VALUES 
-    ('Juan.perez@gmail.com', '$2b$10$7.ocSy32nJJx6Easa1YgiOfuu91gjtRl2HG/Zg9F8MtSu8auG1UkS', '12345678A'), 
-    ('Ana.gomez@gmail.com', '$2b$10$7.ocSy32nJJx6Easa1YgiOfuu91gjtRl2HG/Zg9F8MtSu8auG1UkS', '87654321B'), 
-    ('Luis.lopez@gmail.com', '$2b$10$7.ocSy32nJJx6Easa1YgiOfuu91gjtRl2HG/Zg9F8MtSu8auG1UkS', '12312312C'), 
-    ('Maria.garcia@gmail.com', '$2b$10$7.ocSy32nJJx6Easa1YgiOfuu91gjtRl2HG/Zg9F8MtSu8auG1UkS', '45645645D'), 
-    ('Carlos.ruiz@@gmail.com', '$2b$10$7.ocSy32nJJx6Easa1YgiOfuu91gjtRl2HG/Zg9F8MtSu8auG1UkS', '78978978E');
+    ('Juan Perez', 'password123', '12345678A'), 
+    ('Ana Gomez', 'password456', '87654321B'), 
+    ('Luis Lopez', 'password789', '12312312C'), 
+    ('Maria Garcia', 'password101', '45645645D'), 
+    ('Carlos Ruiz', 'password102', '78978978E');
 
-
-INSERT INTO RecetasUsuarios (userID, recetaID) VALUES 
-    (1, 1), 
-    (2, 2), 
-    (3, 3), 
-    (4, 4), 
-    (5, 5),
-    (1, 2), 
-    (2, 4), 
-    (3, 3), 
-    (4, 2), 
-    (3, 5);
 -- Tabla RecetasFavoritas
-INSERT INTO RecetasFavoritas (recFavStatus, recUserID) VALUES 
-    (1, 1), 
-    (2, 2), 
-    (3, 3), 
-    (4, 4), 
-    (5, 5);
+INSERT INTO RecetasFavoritas (userID, recetaID, recFavStatus) VALUES 
+    (1, 1, 1), 
+    (2, 2, 0), 
+    (3, 3, 1), 
+    (4, 4, 0), 
+    (5, 5, 1);
 
 -- Tabla CalificacionRecetas
-INSERT INTO CalificacionRecetas (calificacion, recUserID) VALUES 
-    (5, 1), 
-    (4, 2), 
-    (3, 3), 
-    (5, 4), 
-    (2, 5);
+INSERT INTO CalificacionRecetas (calificacion, recetaID, userID) VALUES 
+    (5, 1, 1), 
+    (4, 2, 2), 
+    (3, 3, 3), 
+    (5, 4, 4), 
+    (2, 5, 5);

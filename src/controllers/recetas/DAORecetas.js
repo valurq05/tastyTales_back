@@ -1,17 +1,17 @@
 import pool from '../../database.js'
 
-export class DAOUsers {
+export class DAORecetas {
     static selectAll = async () => {
         const [data] = await pool.query('SELECT *' + ' ' +
-            'FROM usuarios AS u' + ' ' +
+            'FROM recetas AS r' + ' ' +
             '');
         return data;
     }
 
     static selectByID = async (id) => {
-        const [[data]] = await pool.query('SELECT u.userID, u.userNombre' + ' ' +
-            'FROM usuarios AS u' + ' ' +
-            'WHERE u.userID = ?', id);
+        const [[data]] = await pool.query('SELECT *' + ' ' +
+            'FROM recetas AS r' + ' ' +
+            'WHERE r.recetaID = ?', id);
         return data;
     }
 }

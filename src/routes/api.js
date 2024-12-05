@@ -3,6 +3,7 @@ import authRoutes from './authRoutes.js';
 import usuariosRoutes from './usuariosRoutes.js';
 import adicionalesRoutes from './adicionalesRoutes.js';
 import calfRecRoutes from './calfRecRoutes.js';
+import recetasRoutes from './recetasRoutes.js';
 
 const router = Router();
 
@@ -19,5 +20,6 @@ router.use(usuariosRoutes);
 router.use(adicionalesRoutes);
 router.use(adicionalesRoutes);
 router.use(calfRecRoutes);
+router.use(recetasRoutes);
 
 export default router;

@@ -51,7 +51,7 @@ export class authController {
         try {
             const { body } = req;
             // const user = { userNombre, userPassword, userDoc }
-            // return res.json(user);
+            // return res.json(body);
 
             // Validación usuario
             validation.usermail(body.userNombre);

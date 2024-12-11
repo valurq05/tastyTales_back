@@ -44,7 +44,6 @@ app.use((req, res, next) => {
     req.session.user = null;
     
   }
-  // return res.json(req.session)
   next(); // ->Continua con las rutas de api
 });
 

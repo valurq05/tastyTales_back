@@ -8,7 +8,8 @@ import { SECRET_JWT_KEY } from '../../config.js';
 export class authController {
     static loginUser = async (req, res) => {
         try {
-            const { userNombre, userPassword } = req.body;
+            const { body } = req;
+            // return res.json(body);
             const user = { userNombre, userPassword }
             // return res.json(user);
             // Validación usuario
@@ -48,21 +49,21 @@ export class authController {
 
     static registerUser = async (req, res) => {
         try {
-            const { userNombre, userPassword, userDoc } = req.body;
-            const user = { userNombre, userPassword, userDoc }
+            const { body } = req;
+            // const user = { userNombre, userPassword, userDoc }
             // return res.json(user);
 
             // Validación usuario
-            validation.usermail(userNombre);
+            validation.usermail(body.userNombre);
 
             // Validación contraseña
-            validation.password(userPassword);
+            validation.password(body.userPassword);
 
-            const userDB = await DAOauth.validExists(userNombre);
+            const userDB = await DAOauth.validExists(body.userNombre);
             if (userDB === 1) throw new Error('El usuario ya existe.');
-            const hashedPassword = await bcrypt.hash(userPassword, 10);
+            const hashedPassword = await bcrypt.hash(body.userPassword, 10);
             // return res.json(hashedPassword);
-            const registro = await DTOauth.register({ user, password: hashedPassword });
+            const registro = await DTOauth.register({ body, password: hashedPassword });
             
             // const token = jwt.sign(
             //     {usermail:userNombre, user: userPassword, rol:userDoc}, 

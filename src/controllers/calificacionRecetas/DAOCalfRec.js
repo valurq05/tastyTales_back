@@ -4,9 +4,8 @@ export class DAOCalfRec {
     static selectAll = async () => {
         const [data] = await pool.query('SELECT cr.calificacion, u.userID, u.userNombre, r.recetaID, r.recetaTitulo' + ' ' +
             'FROM calificacionrecetas cr' + ' ' +
-            'INNER JOIN recetasusuarios ru ON ru.recUserID = cr.recUserID' + ' ' +
-            'INNER JOIN usuarios u ON u.userID = ru.userID' + ' ' +
-            'INNER JOIN recetas r ON r.recetaID = ru.recetaID'
+            'INNER JOIN usuarios u ON u.userID = cr.userID' + ' ' +
+            'INNER JOIN recetas r ON r.recetaID = cr.recetaID'
         );
         return data;
     }
@@ -14,10 +13,9 @@ export class DAOCalfRec {
     static selectByID = async (id) => {
         const [[data]] = await pool.query('SELECT cr.calificacion, u.userID, u.userNombre, r.recetaID, r.recetaTitulo' + ' ' +
             'FROM calificacionrecetas cr' + ' ' +
-            'INNER JOIN recetasusuarios ru ON ru.recUserID = cr.recUserID' + ' ' +
-            'INNER JOIN usuarios u ON u.userID = ru.userID' + ' ' +
-            'INNER JOIN recetas r ON r.recetaID = ru.recetaID' + ' ' +
-            'WHERE userID = ?', id);
+            'INNER JOIN usuarios u ON u.userID = cr.userID' + ' ' +
+            'INNER JOIN recetas r ON r.recetaID = cr.recetaID' + ' ' +
+            'WHERE cr.userID = ?', id);
         return data;
     }
 }

@@ -1,4 +1,3 @@
-@ -0,0 +1,142 @@
 -- CREACIÓN BASE DE DATOS
 CREATE DATABASE tasty_tales;
 
@@ -10,8 +9,18 @@ CREATE TABLE Usuarios (
     userID INT PRIMARY KEY AUTO_INCREMENT,
     userNombre VARCHAR(255),
     userPassword VARCHAR(255),
-    userDoc VARCHAR(255)
+    userFoto VARCHAR(255)
 );
+
+CREATE TABLE Personas (
+    perID INT PRIMARY KEY AUTO_INCREMENT,
+    perName VARCHAR(255),
+    perLastName VARCHAR(255),
+    perDoc VARCHAR(15),
+    userID INT,
+    FOREIGN KEY (userID) REFERENCES Usuarios(userID)
+);
+
 CREATE TABLE Recetas (
     recetaID INT PRIMARY KEY AUTO_INCREMENT,
     recetaTitulo VARCHAR(255),
@@ -20,9 +29,9 @@ CREATE TABLE Recetas (
     userID INT,
     FOREIGN KEY (userID) REFERENCES Usuarios(userID)
 );
-CREATE TABLE Adicionales (
-    adicionalID INT PRIMARY KEY AUTO_INCREMENT,
-    adDescripcion VARCHAR(255)
+CREATE TABLE features (
+    featureID INT PRIMARY KEY AUTO_INCREMENT,
+    featureDesc VARCHAR(255)
 );
 
 CREATE TABLE Pasos (
@@ -33,12 +42,12 @@ CREATE TABLE Pasos (
     FOREIGN KEY (recetaID) REFERENCES Recetas(recetaID)
 );
 
-CREATE TABLE PasosAdicionales (
-    pasAdicID INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE featuresByUser (
+    featUseID INT PRIMARY KEY AUTO_INCREMENT,
     pasoID INT,
-    adicionalID INT,
+    featureID INT,
     FOREIGN KEY (pasoID) REFERENCES Pasos(pasosID),
-    FOREIGN KEY (adicionalID) REFERENCES Adicionales(adicionalID)
+    FOREIGN KEY (featureID) REFERENCES features(featureID)
 );
 
 CREATE TABLE Categorias (
@@ -76,15 +85,15 @@ CREATE TABLE CalificacionRecetas (
 -- INSERTAR DATOS
 
 -- Tabla Recetas
-INSERT INTO Recetas (recetaTitulo, recetaDescripcion, recetaStatus) VALUES 
-    ('Ensalada César', 'Ensalada clásica con aderezo César y crutones', 1), 
-    ('Pizza Margarita', 'Pizza con tomate, albahaca y mozzarella', 0), 
-    ('Pastel de Chocolate', 'Pastel suave de chocolate con frosting', 1), 
-    ('Sopa de Verduras', 'Sopa caliente con verduras frescas', 1), 
-    ('Tacos al Pastor', 'Tacos de carne de cerdo al pastor con piña', 1);
+INSERT INTO Recetas (recetaTitulo, recetaDescripcion, recetaStatus, userID) VALUES 
+    ('Ensalada César', 'Ensalada clásica con aderezo César y crutones', 1, 1), 
+    ('Pizza Margarita', 'Pizza con tomate, albahaca y mozzarella', 0, 1), 
+    ('Pastel de Chocolate', 'Pastel suave de chocolate con frosting', 1, 2), 
+    ('Sopa de Verduras', 'Sopa caliente con verduras frescas', 1, 3), 
+    ('Tacos al Pastor', 'Tacos de carne de cerdo al pastor con piña', 1, 1);
 
 -- Tabla Adicionales
-INSERT INTO Adicionales (adDescripcion) VALUES 
+INSERT INTO features (featureDesc) VALUES 
     ('Cronometro'), 
     ('Video');
 
@@ -97,7 +106,7 @@ INSERT INTO Pasos (pasoTitulo, pasoDescripcion, recetaID) VALUES
     ('Servir', 'Emplatar y servir caliente', 1);
 
 -- Tabla PasosAdicionales
-INSERT INTO PasosAdicionales (pasoID, adicionalID) VALUES 
+INSERT INTO featuresByUser (pasoID, featureID) VALUES 
     (1, 1), 
     (2, 2), 
     (3, 1), 
@@ -121,12 +130,20 @@ INSERT INTO RecetasCategorias (recetaID, categoriaID) VALUES
     (5, 5);
 
 -- Tabla Usuarios
-INSERT INTO Usuarios (userNombre, userPassword, userDoc) VALUES 
-    ('Juan Perez', 'password123', '12345678A'), 
-    ('Ana Gomez', 'password456', '87654321B'), 
-    ('Luis Lopez', 'password789', '12312312C'), 
-    ('Maria Garcia', 'password101', '45645645D'), 
-    ('Carlos Ruiz', 'password102', '78978978E');
+INSERT INTO Usuarios (userNombre, userPassword, userFoto) VALUES 
+    ('juan@gmail.com', 'password123', '/fotos/juan.jpg'), 
+    ('ana@gmail.com', 'password456', '/fotos/ana.jpg'), 
+    ('luis@gmail.com', 'password789', '/fotos/luis.jpg'), 
+    ('Maria@gmail.com', 'password101', '/fotos/maria.jpg'), 
+    ('carlos@gmail.com', 'password102', '/fotos/carlos.jpg');
+
+-- Tabla Personas
+INSERT INTO Personas (perName, perLastName, perDoc, userID) VALUES 
+    ('Juan', 'Perez', '12345678A', 1), 
+    ('Ana', 'Gomez', '87654321B', 2), 
+    ('Luis', 'Lopez', '12312312C', 3), 
+    ('Maria', 'Garcia', '45645645D', 4), 
+    ('Carlos', 'Ruiz', '78978978E', 5);
 
 -- Tabla RecetasFavoritas
 INSERT INTO RecetasFavoritas (userID, recetaID, recFavStatus) VALUES 
@@ -142,4 +159,10 @@ INSERT INTO CalificacionRecetas (calificacion, recetaID, userID) VALUES
     (4, 2, 2), 
     (3, 3, 3), 
     (5, 4, 4), 
-    (2, 5, 5);
+    (2, 5, 5),
+    (5, 1, 1), 
+    (4, 1, 2), 
+    (3, 1, 3), 
+    (5, 2, 4), 
+    (2, 3, 5);
+

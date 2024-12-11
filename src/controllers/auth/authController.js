@@ -78,7 +78,7 @@ export class authController {
             //     maxAge: 1000 * 60 * 60
             // })
             // .send({registro, token});
-            return res.status(200).json(registro);
+            return res.status(200).json({status: true, registro});
             // const crypto = criptoJS.AES.encrypt('Uniempresarial1*', keyPassword).toString();
 
         } catch (e) {

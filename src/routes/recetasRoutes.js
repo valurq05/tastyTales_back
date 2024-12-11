@@ -4,7 +4,7 @@ const router = Router();
 
 const { getRecetas, selectByID, selectByUserID } = recetasController;
 
-router.get('/   ', getRecetas);
+router.get('/recetas', getRecetas);
 router.get('/recetas/:id', selectByID);
 router.get('/recetas-usuario/:id', selectByUserID);
 

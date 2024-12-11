@@ -9,7 +9,7 @@ export class DAORecFav {
     // }
 
     static selectByIDUser = async (id) => {
-        const [[data]] = await pool.query(`SELECT rf.recFavID, rf.userID, rf.recetaID, 
+        const [data] = await pool.query(`SELECT rf.recFavID, rf.userID, rf.recetaID, 
             u.userNombre, 
             p.perName, p.perLastName, 
             r.recetaTitulo, r.recetaDescripcion, r.recetaStatus 

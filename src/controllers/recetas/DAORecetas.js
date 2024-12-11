@@ -5,7 +5,10 @@ export class DAORecetas {
         const [data] = await pool.query('SELECT *' + ' ' +
             'FROM recetas AS r' + ' ' +
             '');
-        return data;
+        const [calif] = await pool.query('SELECT AVG(c.calificacion) AS calificacion, c.recetaID' + ' ' +
+            'FROM calificacionRecetas AS c' + ' ' +
+            'GROUP BY c.recetaID');
+        return {data, calif};
     }
 
     static selectByID = async (id) => {

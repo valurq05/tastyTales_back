@@ -1,4 +1,5 @@
 import { DAORecFav } from './DAORecFav.js';
+import { DTORecFav } from './DTORecFav.js';
 
 export class recetasFavController {
     static getRecetasFavoritas = async (req, res) => {
@@ -13,14 +14,14 @@ export class recetasFavController {
         }
     }
 
-    // static selectByID = async (req, res) => {
-    //     try {
-    //         const { user } = req.session;
-    //         if (!user) return res.status(401).json({ user: null });
-    //         const data = await DAOUsers.selectByID(user.userID);
-    //         return res.status(200).json(data);
-    //     } catch (e) {
-    //         return res.status(400).json(e);
-    //     }
-    // }
+    static postRecetasFavoritas = async (req, res) => {
+        try {
+            const { body } = req;
+            // if (!user) return res.status(401).json({ message: 'No autorizado' });
+            const data = await DTORecFav.createFavRecipe(body);
+            return res.status(200).json(data);
+        } catch (e) {
+            return res.status(400).json(e);
+        }
+    }
 }

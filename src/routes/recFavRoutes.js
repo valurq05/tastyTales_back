@@ -2,9 +2,9 @@ import Router from 'express';
 import { recetasFavController } from '../controllers/recetasFavoritas/recetasFavController.js';
 const router = Router();
 
-const { getRecetasFavoritas } = recetasFavController;
+const { getRecetasFavoritas, postRecetasFavoritas } = recetasFavController;
 
 router.get('/recetas-favoritas/:id', getRecetasFavoritas);
-router.get('/recetas-usuario/:id');
+router.post('/recetas-favoritas', postRecetasFavoritas);
 
 export default router;

@@ -10,15 +10,13 @@ export class authController {
         try {
             const { body } = req;
             // return res.json(body);
-            const user = { userNombre, userPassword }
-            // return res.json(user);
             // Validación usuario
-            validation.usermail(userNombre);
+            validation.usermail(body.userNombre);
             // Validación contraseña
-            validation.password(userPassword);
+            validation.password(body.userPassword);
 
             // Validar que el usuario exista 
-            const userDB = await DAOauth.login(user);
+            const userDB = await DAOauth.login(body);
             // return res.json(userDB);
             if (!userDB) throw new Error('Usuario no encontrado.');
             const isValidPass = await bcrypt.compare(userPassword, userDB.userPassword);
@@ -63,7 +61,7 @@ export class authController {
             if (userDB === 1) throw new Error('El usuario ya existe.');
             const hashedPassword = await bcrypt.hash(body.userPassword, 10);
             // return res.json(hashedPassword);
-            const registro = await DTOauth.register({ body, password: hashedPassword });
+            const registro = await DTOauth.register({ user: body, password: hashedPassword });
             
             // const token = jwt.sign(
             //     {usermail:userNombre, user: userPassword, rol:userDoc}, 

@@ -20,11 +20,11 @@ export class authController {
             // Validar que el usuario exista 
             const userDB = await DAOauth.login(user);
             if (!userDB) throw new Error('Usuario no encontrado.');
-            // return res.json(userDB.data);
-            const isValidPass = await bcrypt.compare(userPassword, userDB.data.data.userPassword);
+            // return res.json(userDB);
+            const isValidPass = await bcrypt.compare(userPassword, userDB.userPassword);
             if (!isValidPass) throw new Error('Contraseña incorrecta.');
             const token = jwt.sign(
-                {userID: userDB.data.data.userID, usermail:userNombre}, 
+                {userID: userDB.userID, usermail:userNombre}, 
                 SECRET_JWT_KEY, 
                 {expiresIn: '1h'}
             );
@@ -37,7 +37,7 @@ export class authController {
             .send({
                 status:true,
                 data: {
-                    user: userDB.data,
+                    user: userDB,
                     token: token
                 }
             });

@@ -2,13 +2,20 @@ import pool from '../../database.js'
 
 export class DAORecetas {
     static selectAll = async () => {
-        const [data] = await pool.query('SELECT *' + ' ' +
-            'FROM recetas AS r' + ' ' +
-            '');
-        const [calif] = await pool.query('SELECT AVG(c.calificacion) AS calificacion, c.recetaID' + ' ' +
-            'FROM calificacionRecetas AS c' + ' ' +
-            'GROUP BY c.recetaID');
-        return {data, calif};
+        const [data] = await pool.query(`
+            SELECT r.recetaID, r.recetaTitulo, r.recetaDescripcion, r.recetaStatus, r.userID, 
+                AVG(c.calificacion) AS calificacion
+            FROM recetas AS r 
+            INNER JOIN calificacionRecetas AS c ON c.recetaID = r.recetaID 
+            GROUP BY 
+                r.recetaID, 
+                r.recetaTitulo, 
+                r.recetaDescripcion, 
+                r.recetaStatus, 
+                r.userID
+        `);
+        return data;
+    
     }
 
     static selectByID = async (id) => {

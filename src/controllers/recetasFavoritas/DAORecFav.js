@@ -9,9 +9,15 @@ export class DAORecFav {
     // }
 
     static selectByIDUser = async (id) => {
-        const [[data]] = await pool.query('SELECT u.userID, u.userNombre' + ' ' +
-            'FROM recetasFavoritas AS u' + ' ' +
-            'WHERE u.userID = ?', id);
+        const [[data]] = await pool.query(`SELECT rf.recFavID, rf.userID, rf.recetaID, 
+            u.userNombre, 
+            p.perName, p.perLastName, 
+            r.recetaTitulo, r.recetaDescripcion, r.recetaStatus 
+            FROM recetasFavoritas AS rf
+            INNER JOIN usuarios AS u ON u.userID = rf.userID
+            INNER JOIN personas AS p ON p.userID = u.userID
+            INNER JOIN recetas AS r ON r.recetaID = rf.recetaID
+            WHERE u.userID = ?`, [id]);
         return data;
     }
 }

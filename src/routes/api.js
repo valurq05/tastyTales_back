@@ -4,6 +4,7 @@ import usuariosRoutes from './usuariosRoutes.js';
 import adicionalesRoutes from './adicionalesRoutes.js';
 import calfRecRoutes from './calfRecRoutes.js';
 import recetasRoutes from './recetasRoutes.js';
+import recFavRoutes from './recFavRoutes.js';
 
 const router = Router();
 
@@ -21,5 +22,6 @@ router.use(adicionalesRoutes);
 router.use(adicionalesRoutes);
 router.use(calfRecRoutes);
 router.use(recetasRoutes);
+router.use(recFavRoutes);
 
 export default router;

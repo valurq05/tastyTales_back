@@ -16,7 +16,7 @@ export class userController {
     static selectByID = async (req, res) => {
         try {
             const { user } = req.session;
-            if (!user) return res.status(401).json({ message: 'No hay sesion activa.'});
+            // if (!user) return res.status(401).json({ message: 'No hay sesion activa.'});
             const data = await DAOUsers.selectByID(user);
             return res.status(200).json(data);
         } catch (e) {

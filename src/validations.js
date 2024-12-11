@@ -5,6 +5,7 @@ export class validation {
     }
 
     static password =  (pass) => {
+        return pass;
         if (typeof pass !== 'string') throw new Error('El formato de contraseña es incorrecta.');
         if (pass.length < 6) throw new Error('La contraseña debe tener al menos 6 caracteres');
     }

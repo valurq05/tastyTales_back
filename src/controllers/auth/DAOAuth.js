@@ -6,7 +6,9 @@ export class DAOauth {
         try {
             const [[data]] = await pool.query('SELECT * FROM usuarios WHERE userNombre = ?',
                 [user.userNombre]);
-            return data;
+            const [[person]] = await pool.query('SELECT * FROM personas p WHERE p.userID = ?',
+                [data.userID]);
+            return {data:{data, person: person}};
         } catch (e) {
             return { message: e.message };
         }

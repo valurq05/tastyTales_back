@@ -8,34 +8,36 @@ import { SECRET_JWT_KEY } from '../../config.js';
 export class authController {
     static loginUser = async (req, res) => {
         try {
-            const { body } = req;
-            // return res.json(body);
+            const { userNombre, userPassword } = req.body;
+            const user = {userNombre, userPassword};
+            // return res.json(user);
+            
             // Validación usuario
-            validation.usermail(body.userNombre);
+            validation.usermail(user.userNombre);
             // Validación contraseña
-            validation.password(body.userPassword);
+            validation.password(user.userPassword);
 
             // Validar que el usuario exista 
-            const userDB = await DAOauth.login(body);
-            // return res.json(userDB);
+            const userDB = await DAOauth.login(user);
             if (!userDB) throw new Error('Usuario no encontrado.');
-            const isValidPass = await bcrypt.compare(userPassword, userDB.userPassword);
+            // return res.json(userDB.data);
+            const isValidPass = await bcrypt.compare(userPassword, userDB.data.data.userPassword);
             if (!isValidPass) throw new Error('Contraseña incorrecta.');
             const token = jwt.sign(
-                {userID: userDB.userID, usermail:userNombre, user:userDB.userNombre}, 
+                {userID: userDB.data.data.userID, usermail:userNombre}, 
                 SECRET_JWT_KEY, 
                 {expiresIn: '1h'}
             );
-            res
-            .cookie('access_token', token,{
+            res.cookie('access_token', token,{
                 httpOnly: true,
                 // secure: true,
                 sameSite: 'strict',
                 maxAge: 1000 * 60 * 60
             })
             .send({
+                status:true,
                 data: {
-                    user: userDB.userNombre,
+                    user: userDB.data,
                     token: token
                 }
             });

@@ -9,10 +9,15 @@ export class DAORecetas {
     }
 
     static selectByID = async (id) => {
-        const [[data]] = await pool.query('SELECT *' + ' ' +
+
+        const [[recipe]] = await pool.query('SELECT *' + ' ' +
             'FROM recetas AS r' + ' ' +
-            'WHERE r.recetaID = ?', id);
-        return data;
+            'WHERE r.userID = ?', id);
+            
+        const [steps] = await pool.query('SELECT p.pasoTitulo, p.pasoDescripcion, p.recetaID' + ' ' +
+                'FROM pasos AS p' + ' ' +
+                'WHERE p.recetaID = ?', recipe.recetaID);
+        return {recipe, steps};
     }
 
     static selectByUserID = async (id) => {

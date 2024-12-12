@@ -29,6 +29,33 @@ CREATE TABLE Recetas (
     userID INT,
     FOREIGN KEY (userID) REFERENCES Usuarios(userID)
 );
+
+CREATE TABLE ingredientes (
+    ingredID INT PRIMARY KEY AUTO_INCREMENT,
+    ingredNombre VARCHAR(255),
+    ingredDescripcion VARCHAR(255),
+    ingredStatus INT
+);
+
+
+CREATE TABLE medidas (
+    medID INT PRIMARY KEY AUTO_INCREMENT,
+    medNombre VARCHAR(255),
+    ingredStatus INT
+);
+
+CREATE TABLE ingredientesRecetas (
+    ingrRecID INT PRIMARY KEY AUTO_INCREMENT,
+    ingrRecCantidad DECIMAL(10,2),
+    ingrRecStatus INT,
+    medID INT,
+    recetaID INT,
+    ingredID INT,
+    FOREIGN KEY (medID) REFERENCES medidas(medID),
+    FOREIGN KEY (ingredID) REFERENCES ingredientes(ingredID),
+    FOREIGN KEY (recetaID) REFERENCES recetas(recetaID)
+);
+
 CREATE TABLE features (
     featureID INT PRIMARY KEY AUTO_INCREMENT,
     featureDesc VARCHAR(255)
@@ -84,6 +111,14 @@ CREATE TABLE CalificacionRecetas (
 );
 -- INSERTAR DATOS
 
+-- Tabla Usuarios
+INSERT INTO Usuarios (userNombre, userPassword, userFoto) VALUES 
+    ('juan@gmail.com', 'password123', '/fotos/juan.jpg'), 
+    ('ana@gmail.com', 'password456', '/fotos/ana.jpg'), 
+    ('luis@gmail.com', 'password789', '/fotos/luis.jpg'), 
+    ('Maria@gmail.com', 'password101', '/fotos/maria.jpg'), 
+    ('carlos@gmail.com', 'password102', '/fotos/carlos.jpg');
+
 -- Tabla Recetas
 INSERT INTO Recetas (recetaTitulo, recetaDescripcion, recetaStatus, userID) VALUES 
     ('Ensalada César', 'Ensalada clásica con aderezo César y crutones', 1, 1), 
@@ -91,6 +126,49 @@ INSERT INTO Recetas (recetaTitulo, recetaDescripcion, recetaStatus, userID) VALU
     ('Pastel de Chocolate', 'Pastel suave de chocolate con frosting', 1, 2), 
     ('Sopa de Verduras', 'Sopa caliente con verduras frescas', 1, 3), 
     ('Tacos al Pastor', 'Tacos de carne de cerdo al pastor con piña', 1, 1);
+
+-- Tabla ingredientes
+INSERT INTO `ingredientes`(`ingredNombre`, `ingredDescripcion`, `ingredStatus`) VALUES 
+('Cebolla larga','Vegetal normalmente vendido en plazas de mercado',1),
+('Tomate','Fruto rojo utilizado en ensaladas y salsas',1),
+('Ajo','Bulbo aromático utilizado como condimento',1),
+('Pimiento','Vegetal de colores variados utilizado en diversas recetas',1),
+('Zanahoria','Raíz comestible de color naranja',1),
+('Yogur','Producto lácteo fermentado',1),
+('Queso','Producto lácteo obtenido por la coagulación de la leche',1),
+('Leche','Líquido blanco producido por las glándulas mamarias de los mamíferos',1),
+('Pollo','Carne de ave comúnmente utilizada en diversas recetas',1),
+('Carne de res','Carne roja proveniente del ganado vacuno',1),
+('Cerdo','Carne proveniente del cerdo',1),
+('Pimienta','Especia obtenida de los granos de la planta Piper nigrum',1),
+('Canela','Especia obtenida de la corteza de árboles del género Cinnamomum',1),
+('Comino','Especia obtenida de las semillas de la planta Cuminum cyminum',1),
+('Orégano','Especia obtenida de las hojas de la planta Origanum vulgare',1);
+
+
+-- Tabla medidas
+INSERT INTO `medidas`(`medNombre`, `ingredStatus`) VALUES 
+('GRAMOS',1),
+('CUCHARADA',1),
+('TAZA',1);
+
+-- Tabla ingredientesrecetas
+INSERT INTO `ingredientesrecetas`(`ingrRecCantidad`, `ingrRecStatus`, `medID`, `recetaID`, `ingredID`) VALUES 
+(500, 1, 1, 2, 1),
+(1, 1, 2, 3, 10),
+(50, 1, 1, 4, 3),
+(300, 1, 1, 5, 4),
+(150, 1, 1, 5, 5),
+(500, 1, 1, 1, 1),
+(200, 1, 1, 2, 2),
+(50, 1, 1, 3, 3),
+(300, 1, 1, 4, 4),
+(150, 1, 1, 5, 5),
+(500, 1, 1, 1, 1),
+(200, 1, 1, 2, 2),
+(50, 1, 1, 3, 3),
+(300, 1, 1, 4, 4);
+
 
 -- Tabla Adicionales
 INSERT INTO features (featureDesc) VALUES 
@@ -128,14 +206,6 @@ INSERT INTO RecetasCategorias (recetaID, categoriaID) VALUES
     (3, 3), 
     (4, 4), 
     (5, 5);
-
--- Tabla Usuarios
-INSERT INTO Usuarios (userNombre, userPassword, userFoto) VALUES 
-    ('juan@gmail.com', 'password123', '/fotos/juan.jpg'), 
-    ('ana@gmail.com', 'password456', '/fotos/ana.jpg'), 
-    ('luis@gmail.com', 'password789', '/fotos/luis.jpg'), 
-    ('Maria@gmail.com', 'password101', '/fotos/maria.jpg'), 
-    ('carlos@gmail.com', 'password102', '/fotos/carlos.jpg');
 
 -- Tabla Personas
 INSERT INTO Personas (perName, perLastName, perDoc, userID) VALUES 

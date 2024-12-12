@@ -28,7 +28,7 @@ export class recetasController {
             const { id } = req.params;
             // if (!user) return res.status(401).json({ user: null });
             const data = await DAORecetas.selectByID(id);
-            return res.status(200).json(data);
+            return res.status(200).json({status: true, data:data});
         } catch (e) {
             return res.status(400).json(e);
         }
